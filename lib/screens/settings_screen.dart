@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grade_calculator/providers/settings_provider.dart';
+import 'package:grade_calculator/providers/module_provider.dart';
 import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -13,8 +13,7 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
-    var settingsProvider =
-        Provider.of<SettingsProvider>(context, listen: false);
+    var settingsProvider = Provider.of<ModuleProvider>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(

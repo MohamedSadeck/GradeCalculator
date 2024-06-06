@@ -6,18 +6,13 @@ import 'package:grade_calculator/screens/home_screen.dart';
 import 'package:grade_calculator/screens/module_form_screen.dart';
 import 'package:grade_calculator/screens/module_list_screen.dart';
 import 'package:provider/provider.dart';
-
-import 'providers/settings_provider.dart';
 import 'screens/settings_screen.dart';
 
 void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => SettingsProvider()),
-        ChangeNotifierProvider(
-          create: (context) => ModuleProvider(),
-        ),
+        ChangeNotifierProvider(create: (context) => ModuleProvider()),
       ],
       child: const MyApp(),
     ),

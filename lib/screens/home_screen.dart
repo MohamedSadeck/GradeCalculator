@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:grade_calculator/screens/module_form_screen.dart';
+import 'package:grade_calculator/providers/module_provider.dart';
 import 'package:provider/provider.dart';
-
-import '../providers/settings_provider.dart';
 import 'grade_list_screen.dart';
 import 'module_list_screen.dart';
 import 'settings_screen.dart';
@@ -40,11 +38,12 @@ class HomeScreen extends StatelessWidget {
               },
               title: const Text('Grades'),
             ),
-            Consumer<SettingsProvider>(
-              builder: (context, settingsProvider, child) {
+            Consumer<ModuleProvider>(
+              builder: (context, moduleProvider, child) {
                 return ListTile(
                   title: Text(
-                      'Current Grade Weight: ${settingsProvider.gradeWeight}'),
+                    'Total average: ${moduleProvider.average.toStringAsFixed(2)}/20',
+                  ),
                 );
               },
             ),
