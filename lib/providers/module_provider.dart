@@ -26,6 +26,7 @@ class ModuleProvider extends ChangeNotifier {
 
   void addModule(Module module) {
     _modules.add(module);
+    _modules.sort((a, b) => b.coefficient.compareTo(a.coefficient));
     _calculateAverage();
     _saveModulesToPrefs();
   }

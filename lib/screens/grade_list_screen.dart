@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grade_calculator/providers/module_provider.dart';
-import 'package:grade_calculator/screens/grade_input_screen.dart';
+import 'package:grade_calculator/widgets/grade_item.dart';
 import 'package:provider/provider.dart';
 
 class GradeListScreen extends StatelessWidget {
@@ -19,17 +19,7 @@ class GradeListScreen extends StatelessWidget {
             itemCount: moduleProvider.modules.length,
             itemBuilder: (context, index) {
               final module = moduleProvider.modules[index];
-              final finalGrade = module.finalGrade ?? 0;
-              return ListTile(
-                title: Text(module.name),
-                subtitle: Text(
-                  finalGrade.toStringAsFixed(2),
-                ),
-                onTap: () {
-                  Navigator.of(context)
-                      .pushNamed(GradeInputScreen.routeName, arguments: module);
-                },
-              );
+              return GradeItem(module: module);
             },
           );
         },

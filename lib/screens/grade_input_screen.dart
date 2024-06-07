@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grade_calculator/constants/constants.dart';
 import 'package:grade_calculator/models/module.dart';
 import 'package:grade_calculator/widgets/grade_picker.dart';
 import 'package:provider/provider.dart';
@@ -15,8 +16,6 @@ class GradeInputScreen extends StatefulWidget {
 }
 
 class _GradeInputScreenState extends State<GradeInputScreen> {
-  final _formKey = GlobalKey<FormState>();
-
   Module? module;
 
   double tpGrade = 0;
@@ -34,15 +33,19 @@ class _GradeInputScreenState extends State<GradeInputScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final height = getScreenHeight(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Grade Input'),
       ),
-      body: Form(
-        key: _formKey,
+      body: Container(
+        padding: const EdgeInsets.fromLTRB(20, 5, 20, 0),
+        height: height * 0.8,
         child: Column(
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             GradePicker(
+              name: 'Exam',
               grade: examGrade,
               onChanged: (value) => setState(() {
                 examGrade = value;
@@ -50,6 +53,7 @@ class _GradeInputScreenState extends State<GradeInputScreen> {
             ),
             if (module!.hasTP)
               GradePicker(
+                name: 'TP',
                 grade: tpGrade,
                 onChanged: (value) => setState(() {
                   tpGrade = value;
@@ -57,6 +61,7 @@ class _GradeInputScreenState extends State<GradeInputScreen> {
               ),
             if (module!.hasTD)
               GradePicker(
+                name: 'TD',
                 grade: tdGrade,
                 onChanged: (value) => setState(() {
                   tdGrade = value;
