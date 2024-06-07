@@ -31,7 +31,7 @@ class ModuleProvider extends ChangeNotifier {
     _saveModulesToPrefs();
   }
 
-  void removeModule(int id) {
+  void removeModule(String id) {
     _modules.removeWhere((module) => module.id == id);
     _calculateAverage();
     _saveModulesToPrefs();
@@ -81,6 +81,7 @@ class ModuleProvider extends ChangeNotifier {
     _modules =
         moduleData.map((data) => Module.fromJson(jsonDecode(data))).toList();
     _calculateAverage();
+    print(modules);
     notifyListeners();
   }
 

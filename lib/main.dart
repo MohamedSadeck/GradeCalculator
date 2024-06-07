@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:grade_calculator/providers/module_provider.dart';
-import 'package:grade_calculator/screens/grade_input_screen.dart';
 import 'package:grade_calculator/screens/grade_list_screen.dart';
 import 'package:grade_calculator/screens/home_screen.dart';
 import 'package:grade_calculator/screens/module_form_screen.dart';
@@ -25,9 +24,34 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+      theme: ThemeData.light().copyWith(
+        colorScheme: ThemeData.light().colorScheme.copyWith(
+              secondary: Colors.black87,
+            ),
+        scaffoldBackgroundColor: Colors.white,
+        textTheme: ThemeData.light().textTheme.copyWith(
+              bodyLarge: const TextStyle(color: Colors.black),
+              bodyMedium: const TextStyle(color: Colors.black87),
+              titleLarge: const TextStyle(color: Colors.black, fontSize: 20),
+            ),
+        appBarTheme: const AppBarTheme(
+          elevation: 2,
+          centerTitle: true,
+          color: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black),
+          titleTextStyle: TextStyle(color: Colors.black, fontSize: 18),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            // backgroundColor: WidgetStateProperty.all(Colors.black87),
+            foregroundColor: WidgetStateProperty.all(Colors.black87),
+            // textStyle: ,
+            padding: WidgetStateProperty.all(
+                const EdgeInsets.symmetric(horizontal: 36, vertical: 12)),
+            shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12))),
+          ),
+        ),
       ),
       initialRoute: HomeScreen.routeName,
       routes: {
@@ -35,7 +59,6 @@ class MyApp extends StatelessWidget {
         ModuleListScreen.routeName: (context) => const ModuleListScreen(),
         ModuleFormScreen.routeName: (context) => const ModuleFormScreen(),
         GradeListScreen.routeName: (context) => const GradeListScreen(),
-        GradeInputScreen.routeName: (context) => const GradeInputScreen(),
         SettingsScreen.routeName: (context) => const SettingsScreen(),
       },
     );
