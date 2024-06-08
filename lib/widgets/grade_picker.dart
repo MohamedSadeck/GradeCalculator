@@ -38,6 +38,7 @@ class _GradePickerState extends State<GradePicker> {
     return Container(
       padding: const EdgeInsets.only(bottom: 10),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           SizedBox(
             width: width * 0.2,
@@ -46,13 +47,18 @@ class _GradePickerState extends State<GradePicker> {
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
-          Expanded(
+          Card(
+            elevation: 4,
             child: Container(
+              height: height * 0.13,
+              width: width * 0.6,
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(5),
+                color: Colors.white,
+                border: Border.all(color: Colors.black87, width: 1),
+                borderRadius: BorderRadius.circular(12),
               ),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
                     child: NumberPicker(

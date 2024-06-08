@@ -30,13 +30,19 @@ class HomeScreen extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).pushNamed(ModuleListScreen.routeName);
               },
-              title: const Text('Modules'),
+              title: const Text(
+                'Modules',
+                style: TextStyle(fontSize: 20),
+              ),
             ),
             ListTile(
               onTap: () {
                 Navigator.of(context).pushNamed(GradeListScreen.routeName);
               },
-              title: const Text('Grades'),
+              title: const Text(
+                'Grades',
+                style: TextStyle(fontSize: 20),
+              ),
             ),
             Consumer<ModuleProvider>(
               builder: (context, moduleProvider, child) {

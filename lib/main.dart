@@ -43,13 +43,17 @@ class MyApp extends StatelessWidget {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
-            // backgroundColor: WidgetStateProperty.all(Colors.black87),
+            backgroundColor: WidgetStateProperty.all(Colors.white),
             foregroundColor: WidgetStateProperty.all(Colors.black87),
-            // textStyle: ,
+            textStyle: WidgetStateProperty.all(const TextStyle(fontSize: 16)),
             padding: WidgetStateProperty.all(
                 const EdgeInsets.symmetric(horizontal: 36, vertical: 12)),
             shape: WidgetStateProperty.all(RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12))),
+                borderRadius: BorderRadius.circular(12),
+                side: const BorderSide(
+                    color:
+                        Colors.black) // add this line to make the border black
+                )),
           ),
         ),
       ),

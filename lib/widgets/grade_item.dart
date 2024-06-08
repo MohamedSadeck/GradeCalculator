@@ -41,9 +41,9 @@ class GradeItem extends StatelessWidget {
                   children: [
                     Container(
                       height: height * 0.08,
-                      padding: const EdgeInsets.only(left: 12, right: 12),
+                      padding: const EdgeInsets.only(left: 24, right: 24),
                       decoration: const BoxDecoration(
-                        color: Colors.white,
+                        color: Color.fromARGB(118, 255, 255, 255),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -53,12 +53,20 @@ class GradeItem extends StatelessWidget {
                             alignment: const AlignmentDirectional(-1, 0),
                             child: Text(
                               module.name,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
                             ),
                           ),
                           Align(
                             alignment: const AlignmentDirectional(1, 0),
                             child: Text(
                               module.finalGrade.toStringAsFixed(2),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
                             ),
                           ),
                         ],
@@ -91,8 +99,18 @@ class GradeItem extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            const Text('Exam'),
-                            Text(module.examGrade.toString()),
+                            const Text(
+                              'Exam',
+                              style: TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
+                            Text(
+                              module.examGrade.toString(),
+                              style: const TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -102,8 +120,18 @@ class GradeItem extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              const Text('TD'),
-                              Text(module.tdGrade.toString()),
+                              const Text(
+                                'TD',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
+                              Text(
+                                module.tdGrade.toString(),
+                                style: const TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -113,8 +141,18 @@ class GradeItem extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              const Text('TP'),
-                              Text(module.tpGrade.toString()),
+                              const Text(
+                                'TP',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
+                              Text(
+                                module.tpGrade.toString(),
+                                style: const TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
                             ],
                           ),
                         ),
