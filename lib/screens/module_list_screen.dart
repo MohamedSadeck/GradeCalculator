@@ -29,10 +29,9 @@ class _ModuleListScreenState extends State<ModuleListScreen> {
                 final scaffoldMessenger = ScaffoldMessenger.of(context);
                 scaffoldMessenger
                     .showSnackBar(
-                      SnackBar(
-                        content:
-                            const Text('Slide left on a module to remove it.'),
-                        duration: const Duration(seconds: 5),
+                      const SnackBar(
+                        content: Text('Slide left on a module to remove it.'),
+                        duration: Duration(seconds: 5),
                         behavior: SnackBarBehavior.floating,
                       ),
                     )

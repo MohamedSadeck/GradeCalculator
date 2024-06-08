@@ -37,55 +37,58 @@ class GradeItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Stack(
-                  children: [
-                    Container(
-                      height: height * 0.08,
-                      padding: const EdgeInsets.only(left: 24, right: 24),
-                      decoration: const BoxDecoration(
-                        color: Color.fromARGB(118, 255, 255, 255),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Align(
-                            alignment: const AlignmentDirectional(-1, 0),
-                            child: Text(
-                              module.name,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                LayoutBuilder(builder:
+                    (BuildContext context, BoxConstraints constraints) {
+                  return Stack(
+                    children: [
+                      Container(
+                        height: height * 0.08,
+                        padding: const EdgeInsets.only(left: 24, right: 24),
+                        decoration: const BoxDecoration(
+                          color: Color.fromARGB(118, 255, 255, 255),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Align(
+                              alignment: const AlignmentDirectional(-1, 0),
+                              child: Text(
+                                module.name,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18,
+                                ),
                               ),
                             ),
-                          ),
-                          Align(
-                            alignment: const AlignmentDirectional(1, 0),
-                            child: Text(
-                              module.finalGrade.toStringAsFixed(2),
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                            Align(
+                              alignment: const AlignmentDirectional(1, 0),
+                              child: Text(
+                                module.finalGrade.toStringAsFixed(2),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 21,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    if (module.finalGrade > 0)
-                      Positioned(
-                        bottom: 1,
-                        left: 0,
-                        child: Container(
-                          height: 2, // You can adjust this as needed
-                          width: MediaQuery.of(context).size.width *
-                                  (module.finalGrade / 20) -
-                              23, // Assuming finalGrade is out of 20
-                          color: getColorBasedOnGrade(module.finalGrade),
+                          ],
                         ),
                       ),
-                  ],
-                ),
+                      if (module.finalGrade > 0)
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          child: Container(
+                            height: 2, // You can adjust this as needed
+                            width: constraints.maxWidth *
+                                (module.finalGrade /
+                                    20), // finalGrade is out of 20
+                            color: getColorBasedOnGrade(module.finalGrade),
+                          ),
+                        ),
+                    ],
+                  );
+                }),
                 Container(
                   height: height * 0.05,
                   decoration: BoxDecoration(
@@ -102,19 +105,20 @@ class GradeItem extends StatelessWidget {
                             const Text(
                               'Exam',
                               style: TextStyle(
-                                fontSize: 15,
-                              ),
+                                  fontSize: 16, fontWeight: FontWeight.w500),
                             ),
                             Text(
                               module.examGrade.toString(),
                               style: const TextStyle(
-                                fontSize: 15,
-                              ),
+                                  fontSize: 16, fontWeight: FontWeight.w500),
                             ),
                           ],
                         ),
                       ),
-                      if (module.hasTD) const VerticalDivider(),
+                      if (module.hasTD)
+                        const VerticalDivider(
+                          thickness: 1.5,
+                        ),
                       if (module.hasTD)
                         Expanded(
                           child: Row(
@@ -123,19 +127,20 @@ class GradeItem extends StatelessWidget {
                               const Text(
                                 'TD',
                                 style: TextStyle(
-                                  fontSize: 15,
-                                ),
+                                    fontSize: 16, fontWeight: FontWeight.w500),
                               ),
                               Text(
                                 module.tdGrade.toString(),
                                 style: const TextStyle(
-                                  fontSize: 15,
-                                ),
+                                    fontSize: 16, fontWeight: FontWeight.w500),
                               ),
                             ],
                           ),
                         ),
-                      if (module.hasTP) const VerticalDivider(),
+                      if (module.hasTP)
+                        const VerticalDivider(
+                          thickness: 1.5,
+                        ),
                       if (module.hasTP)
                         Expanded(
                           child: Row(
@@ -144,14 +149,12 @@ class GradeItem extends StatelessWidget {
                               const Text(
                                 'TP',
                                 style: TextStyle(
-                                  fontSize: 15,
-                                ),
+                                    fontSize: 16, fontWeight: FontWeight.w500),
                               ),
                               Text(
                                 module.tpGrade.toString(),
                                 style: const TextStyle(
-                                  fontSize: 15,
-                                ),
+                                    fontSize: 16, fontWeight: FontWeight.w500),
                               ),
                             ],
                           ),
