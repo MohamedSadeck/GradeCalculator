@@ -17,34 +17,57 @@ class ModuleTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dismissible(
-      key: Key(module.id),
-      direction: DismissDirection.endToStart,
-      confirmDismiss: (direction) async {
-        return await deleteDialog(context);
-      },
-      onDismissed: (direction) {
-        moduleProvider.removeModule(module.id);
-      },
-      background: FractionallySizedBox(
-        alignment: Alignment.centerRight,
-        widthFactor:
-            0.3, // Adjust this value to control the width of the background
-        child: Container(
-          color: Colors.red,
-          alignment: Alignment.centerRight,
-          padding: const EdgeInsets.only(right: 20),
-          child: const Icon(Icons.delete, color: Colors.white),
-        ),
-      ),
-      child: ListTile(
-        onTap: () {
-          Navigator.of(context)
-              .pushNamed(ModuleFormScreen.routeName, arguments: module);
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0, bottom: 4),
+      child: Dismissible(
+        key: Key(module.id),
+        direction: DismissDirection.endToStart,
+        confirmDismiss: (direction) async {
+          return await deleteDialog(context);
         },
-        title: Text(
-          module.name,
-          style: const TextStyle(fontSize: 20, color: Colors.black),
+        onDismissed: (direction) {
+          moduleProvider.removeModule(module.id);
+        },
+        background: FractionallySizedBox(
+          alignment: Alignment.centerRight,
+          widthFactor: 0.3,
+          child: Container(
+            decoration: const BoxDecoration(
+              color: Colors.red,
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(15.0),
+                bottomRight: Radius.circular(15.0),
+              ),
+            ),
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.only(right: 20),
+            child: const Icon(Icons.delete, color: Colors.white),
+          ),
+        ),
+        child: Card(
+          elevation: 5,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: ListTile(
+            onTap: () {
+              Navigator.of(context)
+                  .pushNamed(ModuleFormScreen.routeName, arguments: module);
+            },
+            title: Text(
+              module.name,
+              style: const TextStyle(fontSize: 20, color: Colors.black),
+            ),
+            leading: CircleAvatar(
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: FittedBox(
+                  child: Text(module.name[0]),
+                ),
+              ),
+            ),
+            trailing: Icon(Icons.arrow_forward_ios),
+          ),
         ),
       ),
     );
