@@ -43,6 +43,10 @@ class Module {
     this.tdGrade = tdGrade;
     this.tpGrade = tpGrade;
     this.examGrade = examGrade;
+    calculateGrades(examWeight: examWeight);
+  }
+
+  void calculateGrades({required examWeight}) {
     if (hasTD && hasTP) {
       finalGrade =
           ((tdGrade + tpGrade) / 2) * (1 - examWeight) + examWeight * examGrade;

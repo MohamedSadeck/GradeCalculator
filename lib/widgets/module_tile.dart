@@ -47,7 +47,8 @@ class ModuleTile extends StatelessWidget {
         child: Card(
           elevation: 5,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+            side: BorderSide.none,
+            borderRadius: BorderRadius.circular(12),
           ),
           child: ListTile(
             onTap: () {
@@ -66,7 +67,7 @@ class ModuleTile extends StatelessWidget {
                 ),
               ),
             ),
-            trailing: Icon(Icons.arrow_forward_ios),
+            trailing: const Icon(Icons.arrow_forward_ios),
           ),
         ),
       ),

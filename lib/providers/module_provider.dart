@@ -15,7 +15,10 @@ class ModuleProvider extends ChangeNotifier {
 
   set gradeWeight(double value) {
     _gradeWeight = value;
-    notifyListeners();
+    for (Module m in _modules) {
+      m.calculateGrades(examWeight: _gradeWeight);
+    }
+    _calculateAverage();
     _saveGradeWeightToPrefs();
   }
 
