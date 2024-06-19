@@ -21,7 +21,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(
         title: const Text('Settings'),
       ),
-      body: ListView(
+      body: Column(
         children: <Widget>[
           const ListTile(
             title: Text('Grade Weight'),

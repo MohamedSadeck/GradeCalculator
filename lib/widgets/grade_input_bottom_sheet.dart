@@ -19,12 +19,21 @@ class _GradeInputBottomSheetState extends State<GradeInputBottomSheet> {
   double tdGrade = 0;
   double examGrade = 0;
 
+  bool hasTP = false;
+  bool hasTD = false;
+
+  int fields = 1;
+
   @override
   void initState() {
     super.initState();
     tpGrade = widget.module.tpGrade;
     tdGrade = widget.module.tdGrade;
     examGrade = widget.module.examGrade;
+    hasTP = widget.module.hasTP;
+    hasTD = widget.module.hasTD;
+    fields += hasTP ? 1 : 0;
+    fields += hasTD ? 1 : 0;
   }
 
   @override
@@ -36,8 +45,8 @@ class _GradeInputBottomSheetState extends State<GradeInputBottomSheet> {
         border: Border.all(color: Theme.of(context).colorScheme.primary),
         borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
       ),
-      padding: const EdgeInsets.fromLTRB(20, 5, 20, 0),
-      height: height * 0.8,
+      padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
+      height: 108 + height * 0.16 * fields,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -48,32 +57,42 @@ class _GradeInputBottomSheetState extends State<GradeInputBottomSheet> {
               examGrade = value;
             }),
           ),
-          if (widget.module.hasTP)
-            GradePicker(
-              name: 'TP',
-              grade: tpGrade,
-              onChanged: (value) => setState(() {
-                tpGrade = value;
-              }),
+          if (hasTP)
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: GradePicker(
+                name: 'TP',
+                grade: tpGrade,
+                onChanged: (value) => setState(() {
+                  tpGrade = value;
+                }),
+              ),
             ),
-          if (widget.module.hasTD)
-            GradePicker(
-              name: 'TD',
-              grade: tdGrade,
-              onChanged: (value) => setState(() {
-                tdGrade = value;
-              }),
+          if (hasTD)
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: GradePicker(
+                name: 'TD',
+                grade: tdGrade,
+                onChanged: (value) => setState(() {
+                  tdGrade = value;
+                }),
+              ),
             ),
-          ElevatedButton(
-            child: const Text('Save'),
-            onPressed: () {
-              Provider.of<ModuleProvider>(context, listen: false).updateGrades(
-                  module: widget.module,
-                  examGrade: examGrade,
-                  tdGrade: tdGrade,
-                  tpGrade: tpGrade);
-              Navigator.of(context).pop();
-            },
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: ElevatedButton(
+              child: const Text('Save'),
+              onPressed: () {
+                Provider.of<ModuleProvider>(context, listen: false)
+                    .updateGrades(
+                        module: widget.module,
+                        examGrade: examGrade,
+                        tdGrade: tdGrade,
+                        tpGrade: tpGrade);
+                Navigator.of(context).pop();
+              },
+            ),
           ),
         ],
       ),
