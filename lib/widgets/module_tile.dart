@@ -45,6 +45,7 @@ class ModuleTile extends StatelessWidget {
         ),
         child: Card(
           elevation: 5,
+          color: Theme.of(context).colorScheme.surfaceBright,
           shape: RoundedRectangleBorder(
             side: BorderSide(
               color: Theme.of(context).colorScheme.primary,

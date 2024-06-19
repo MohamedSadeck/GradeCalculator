@@ -44,7 +44,13 @@ class GradeItem extends StatelessWidget {
                     children: [
                       Container(
                         height: height * 0.08,
-                        color: Theme.of(context).colorScheme.surface,
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(16),
+                            topRight: Radius.circular(16),
+                          ),
+                          color: Theme.of(context).colorScheme.surfaceBright,
+                        ),
                         padding: const EdgeInsets.only(left: 24, right: 24),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
@@ -88,8 +94,15 @@ class GradeItem extends StatelessWidget {
                     ],
                   );
                 }),
-                SizedBox(
+                Container(
                   height: height * 0.05,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(16),
+                      bottomRight: Radius.circular(16),
+                    ),
+                    color: Theme.of(context).colorScheme.surfaceContainer,
+                  ),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -113,7 +126,7 @@ class GradeItem extends StatelessWidget {
                       ),
                       if (module.hasTD)
                         const VerticalDivider(
-                          thickness: 1.5,
+                          thickness: 0.75,
                         ),
                       if (module.hasTD)
                         Expanded(
@@ -135,7 +148,7 @@ class GradeItem extends StatelessWidget {
                         ),
                       if (module.hasTP)
                         const VerticalDivider(
-                          thickness: 1.5,
+                          thickness: 0.75,
                         ),
                       if (module.hasTP)
                         Expanded(

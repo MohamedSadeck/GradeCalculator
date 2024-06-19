@@ -70,7 +70,7 @@ class _ModuleFormScreenState extends State<ModuleFormScreen> {
           actions: [
             if (module != null)
               IconButton(
-                icon: const Icon(Icons.delete),
+                icon: const Icon(Icons.delete, color: Colors.red),
                 onPressed: () async {
                   if (module != null) {
                     final navigator = Navigator.of(context);
@@ -94,7 +94,11 @@ class _ModuleFormScreenState extends State<ModuleFormScreen> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: TextButton(
-                  child: const Text('Cancel'),
+                  child: Text(
+                    'Cancel',
+                    style:
+                        TextStyle(color: Theme.of(context).colorScheme.error),
+                  ),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -176,9 +180,7 @@ class _ModuleFormScreenState extends State<ModuleFormScreen> {
                                 children: <Widget>[
                                   const Text(
                                     'Coefficient',
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
+                                    style: TextStyle(fontSize: 18),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
@@ -208,9 +210,7 @@ class _ModuleFormScreenState extends State<ModuleFormScreen> {
                                 children: <Widget>[
                                   const Text(
                                     'Credit',
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
+                                    style: TextStyle(fontSize: 18),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),

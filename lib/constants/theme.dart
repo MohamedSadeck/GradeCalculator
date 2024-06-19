@@ -86,6 +86,11 @@ import 'package:flutter/material.dart';
 //   ),
 // );
 ThemeData lightTheme = ThemeData(
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Colors.white,
+    centerTitle: true,
+    elevation: 0,
+  ),
   primaryColor: const Color(0xFF2196F3),
   primaryColorDark: const Color(0xFF1976D2),
   hintColor: const Color(0xFFBBDEFB),
@@ -96,6 +101,8 @@ ThemeData lightTheme = ThemeData(
     secondary: Color(0xFFBBDEFB),
     onSecondary: Colors.black,
     surface: Colors.white,
+    surfaceBright: Color.fromARGB(255, 245, 245, 245),
+    surfaceContainer: Color.fromARGB(255, 225, 225, 225),
     onSurface: Colors.black,
     error: Colors.redAccent,
   ).copyWith(surface: Colors.white),
@@ -120,6 +127,11 @@ ThemeData lightTheme = ThemeData(
 );
 
 ThemeData darkTheme = ThemeData(
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Color(0xFF121212),
+    centerTitle: true,
+    elevation: 0,
+  ),
   primaryColor: const Color(0xFFBBDEFB),
   primaryColorDark: const Color(0xFF2196F3),
   hintColor: const Color(0xFF1976D2),
@@ -130,6 +142,8 @@ ThemeData darkTheme = ThemeData(
     secondary: Color(0xFF1976D2),
     onSecondary: Colors.white,
     surface: Color(0xFF121212),
+    surfaceBright: Color.fromARGB(255, 59, 59, 59),
+    surfaceContainer: Color.fromARGB(255, 39, 39, 39),
     onSurface: Colors.white,
     error: Colors.redAccent,
   ).copyWith(surface: Colors.black),
