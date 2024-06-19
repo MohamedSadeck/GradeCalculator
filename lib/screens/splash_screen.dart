@@ -1,13 +1,10 @@
 // splash_screen.dart
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../providers/theme_provider.dart';
 import 'home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
-  static const routeName = '/splash';
+  static const routeName = '/';
 
   const SplashScreen({super.key});
 
@@ -19,11 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
-      themeProvider.updateTheme(context);
-    });
-    Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 1), () {
       Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
     });
   }

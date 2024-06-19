@@ -5,6 +5,8 @@ import 'package:grade_calculator/providers/module_provider.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:provider/provider.dart';
 
+import '../utils/delete_dialog.dart';
+
 class ModuleFormScreen extends StatefulWidget {
   const ModuleFormScreen({super.key});
   static const routeName = '/moduleForm';
@@ -47,7 +49,7 @@ class _ModuleFormScreenState extends State<ModuleFormScreen> {
       hasTP = module!.hasTP;
       hasTD = module!.hasTD;
     }
-    nameController.text = name;
+    if (nameController.text.isEmpty) nameController.text = name;
   }
 
   @override
@@ -65,6 +67,26 @@ class _ModuleFormScreenState extends State<ModuleFormScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
+          actions: [
+            if (module != null)
+              IconButton(
+                icon: const Icon(Icons.delete),
+                onPressed: () async {
+                  if (module != null) {
+                    final navigator = Navigator.of(context);
+                    final moduleProvider =
+                        Provider.of<ModuleProvider>(context, listen: false);
+                    final shouldDelete = await deleteDialog(context);
+                    if (shouldDelete == true) {
+                      moduleProvider.removeModule(module!.id);
+                      if (navigator.mounted) {
+                        navigator.pop();
+                      }
+                    }
+                  }
+                },
+              ),
+          ],
           automaticallyImplyLeading: false,
           title: Stack(
             alignment: Alignment.center,
@@ -95,22 +117,31 @@ class _ModuleFormScreenState extends State<ModuleFormScreen> {
                       TextFormField(
                         controller: nameController,
                         textCapitalization: TextCapitalization.words,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           labelText: 'Module Name',
                           hintText: 'Enter the module name',
-                          border: OutlineInputBorder(),
-                          errorStyle:
-                              TextStyle(color: Colors.redAccent, fontSize: 15),
-                          labelStyle:
-                              TextStyle(color: Colors.black87, fontSize: 18),
-                          hintStyle:
-                              TextStyle(color: Colors.grey, fontSize: 14),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Theme.of(context).colorScheme.primary),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Theme.of(context).colorScheme.primary),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          errorStyle: const TextStyle(fontSize: 15),
+                          labelStyle: TextStyle(
+                            fontSize: 18,
+                            color: Theme.of(context).colorScheme.onSecondary,
+                          ),
+                          hintStyle: TextStyle(
+                            fontSize: 14,
+                            color: Theme.of(context).colorScheme.onSecondary,
+                            fontWeight: FontWeight.w300,
+                          ),
                         ),
-                        style: const TextStyle(
-                            color: Colors.black87, fontSize: 18),
-                        onChanged: (value) {
-                          setState(() => name = value);
-                        },
+                        style: const TextStyle(fontSize: 18),
                         validator: (value) {
                           String trimmedValue = value!.toLowerCase().trim();
                           if (trimmedValue.isEmpty) {
@@ -118,9 +149,10 @@ class _ModuleFormScreenState extends State<ModuleFormScreen> {
                           } else if (!RegExp(r'^[a-zA-Z0-9 ]+$')
                               .hasMatch(trimmedValue)) {
                             return 'Only alphanumeric & spaces allowed';
-                          } else if (moduleProvider.modules.any((module) =>
-                              module.name.toLowerCase().trim() ==
-                              trimmedValue)) {
+                          } else if (module == null &&
+                              moduleProvider.modules.any((module) =>
+                                  module.name.toLowerCase().trim() ==
+                                  trimmedValue)) {
                             return 'This module already exists';
                           }
                           return null;
@@ -131,8 +163,10 @@ class _ModuleFormScreenState extends State<ModuleFormScreen> {
                         margin: const EdgeInsets.only(top: 20, bottom: 20),
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black87),
                           borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -144,7 +178,6 @@ class _ModuleFormScreenState extends State<ModuleFormScreen> {
                                     'Coefficient',
                                     style: TextStyle(
                                         fontSize: 18,
-                                        color: Colors.black87,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Padding(
@@ -157,18 +190,17 @@ class _ModuleFormScreenState extends State<ModuleFormScreen> {
                                           setState(() => coefficient = value),
                                       itemHeight: 33,
                                       textStyle: const TextStyle(
-                                          fontSize: 18, color: Colors.black87),
+                                        fontSize: 18,
+                                      ),
                                       selectedTextStyle: const TextStyle(
                                         fontSize: 26,
-                                        color: Color.fromARGB(255, 9, 2, 207),
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                            VerticalDivider(
-                              color: Colors.grey,
+                            const VerticalDivider(
                               thickness: 1,
                             ),
                             Expanded(
@@ -178,7 +210,6 @@ class _ModuleFormScreenState extends State<ModuleFormScreen> {
                                     'Credit',
                                     style: TextStyle(
                                         fontSize: 18,
-                                        color: Colors.black87,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Padding(
@@ -191,11 +222,11 @@ class _ModuleFormScreenState extends State<ModuleFormScreen> {
                                           setState(() => credit = value),
                                       itemHeight: 33,
                                       textStyle: const TextStyle(
-                                          fontSize: 18, color: Colors.black87),
+                                        fontSize: 18,
+                                      ),
                                       selectedTextStyle: const TextStyle(
-                                          fontSize: 26,
-                                          color:
-                                              Color.fromARGB(255, 9, 2, 207)),
+                                        fontSize: 26,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -207,7 +238,8 @@ class _ModuleFormScreenState extends State<ModuleFormScreen> {
                       Container(
                         margin: const EdgeInsets.only(bottom: 20),
                         decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black87),
+                          border:
+                              Border.all(color: Theme.of(context).primaryColor),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Column(
@@ -235,7 +267,7 @@ class _ModuleFormScreenState extends State<ModuleFormScreen> {
                             if (module == null) {
                               moduleProvider.addModule(
                                 Module(
-                                  name: name,
+                                  name: nameController.text,
                                   coefficient: coefficient,
                                   credit: credit,
                                   hasTP: hasTP,

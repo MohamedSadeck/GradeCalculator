@@ -32,9 +32,10 @@ class _GradeInputBottomSheetState extends State<GradeInputBottomSheet> {
     final height = MediaQuery.of(context).size.height;
 
     return Container(
-      decoration: const BoxDecoration(
-          color: Color(0xFFFEFEFF),
-          borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
+      decoration: BoxDecoration(
+        border: Border.all(color: Theme.of(context).colorScheme.primary),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+      ),
       padding: const EdgeInsets.fromLTRB(20, 5, 20, 0),
       height: height * 0.8,
       child: Column(

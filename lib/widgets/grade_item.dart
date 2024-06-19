@@ -44,10 +44,8 @@ class GradeItem extends StatelessWidget {
                     children: [
                       Container(
                         height: height * 0.08,
+                        color: Theme.of(context).colorScheme.surface,
                         padding: const EdgeInsets.only(left: 24, right: 24),
-                        decoration: const BoxDecoration(
-                          color: Color.fromARGB(118, 255, 255, 255),
-                        ),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -90,11 +88,8 @@ class GradeItem extends StatelessWidget {
                     ],
                   );
                 }),
-                Container(
+                SizedBox(
                   height: height * 0.05,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[100],
-                  ),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -9,7 +9,7 @@ import 'settings_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-  static const routeName = '/';
+  static const routeName = '/home';
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +36,12 @@ class HomeScreen extends StatelessWidget {
           children: <Widget>[
             Consumer<ModuleProvider>(
               builder: (context, moduleProvider, child) {
-                return Container(
+                return SizedBox(
                   height: height * 0.6,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text(
+                      const Text(
                         'Total average:',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 45),
@@ -105,15 +105,15 @@ class MyContainer extends StatelessWidget {
       },
       child: Card(
         elevation: 9,
-        color: Colors.white,
         child: Container(
           width: width * 0.45,
           height: double.infinity,
           padding: const EdgeInsets.all(8.0),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(12),
             border: Border.all(
               width: 2,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
           child: Column(
@@ -125,7 +125,7 @@ class MyContainer extends StatelessWidget {
               ),
               Text(
                 text,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),

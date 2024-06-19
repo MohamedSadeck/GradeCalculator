@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:grade_calculator/constants/theme.dart';
 import 'package:grade_calculator/providers/module_provider.dart';
 import 'package:grade_calculator/providers/theme_provider.dart';
 import 'package:grade_calculator/screens/grade_list_screen.dart';
@@ -33,8 +32,8 @@ class MyApp extends StatelessWidget {
       theme: themeProvider.themeData,
       initialRoute: SplashScreen.routeName,
       routes: {
-        HomeScreen.routeName: (context) => const HomeScreen(),
         SplashScreen.routeName: (context) => const SplashScreen(),
+        HomeScreen.routeName: (context) => const HomeScreen(),
         ModuleListScreen.routeName: (context) => const ModuleListScreen(),
         ModuleFormScreen.routeName: (context) => const ModuleFormScreen(),
         GradeListScreen.routeName: (context) => const GradeListScreen(),

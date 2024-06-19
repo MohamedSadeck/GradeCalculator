@@ -53,8 +53,8 @@ class _GradePickerState extends State<GradePicker> {
               height: height * 0.13,
               width: width * 0.6,
               decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(color: Colors.black87, width: 1),
+                border: Border.all(
+                    color: Theme.of(context).colorScheme.primary, width: 1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Row(
@@ -64,6 +64,14 @@ class _GradePickerState extends State<GradePicker> {
                     child: NumberPicker(
                       itemHeight: height * 0.04,
                       value: grade.toInt(),
+                      textStyle: const TextStyle(
+                        fontSize: 18,
+                      ),
+                      selectedTextStyle: TextStyle(
+                        fontSize: 25,
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
                       minValue: 0,
                       maxValue: 20,
                       onChanged: (value) {
@@ -83,6 +91,15 @@ class _GradePickerState extends State<GradePicker> {
                     child: NumberPicker(
                       itemHeight: height * 0.04,
                       value: fraction,
+                      textStyle: const TextStyle(
+                        fontSize: 18,
+                      ),
+                      selectedTextStyle: TextStyle(
+                        fontSize: 25,
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      // infiniteLoop: true,
                       minValue: 0,
                       maxValue: grade.toInt() == 20 ? 0 : 75,
                       step: 25,

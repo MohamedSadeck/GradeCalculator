@@ -18,7 +18,7 @@ class ModuleTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 8.0, bottom: 4),
+      padding: const EdgeInsets.symmetric(vertical: 4),
       child: Dismissible(
         key: Key(module.id),
         direction: DismissDirection.endToStart,
@@ -30,14 +30,13 @@ class ModuleTile extends StatelessWidget {
         },
         background: FractionallySizedBox(
           alignment: Alignment.centerRight,
-          widthFactor: 0.3,
           child: Container(
             decoration: const BoxDecoration(
               color: Colors.red,
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(15.0),
-                bottomRight: Radius.circular(15.0),
-              ),
+              // borderRadius: BorderRadius.only(
+              //   topRight: Radius.circular(15.0),
+              //   bottomRight: Radius.circular(15.0),
+              // ),
             ),
             alignment: Alignment.centerRight,
             padding: const EdgeInsets.only(right: 20),
@@ -47,23 +46,33 @@ class ModuleTile extends StatelessWidget {
         child: Card(
           elevation: 5,
           shape: RoundedRectangleBorder(
-            side: BorderSide.none,
+            side: BorderSide(
+              color: Theme.of(context).colorScheme.primary,
+            ),
             borderRadius: BorderRadius.circular(12),
           ),
           child: ListTile(
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
             onTap: () {
               Navigator.of(context)
                   .pushNamed(ModuleFormScreen.routeName, arguments: module);
             },
             title: Text(
               module.name,
-              style: const TextStyle(fontSize: 20, color: Colors.black),
+              style: const TextStyle(
+                fontSize: 20,
+              ),
             ),
             leading: CircleAvatar(
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: FittedBox(
-                  child: Text(module.name[0]),
+                  child: Text(
+                    module.name[0],
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimary),
+                  ),
                 ),
               ),
             ),

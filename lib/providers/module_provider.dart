@@ -84,7 +84,6 @@ class ModuleProvider extends ChangeNotifier {
     _modules =
         moduleData.map((data) => Module.fromJson(jsonDecode(data))).toList();
     _calculateAverage();
-    print(modules);
     notifyListeners();
   }
 
