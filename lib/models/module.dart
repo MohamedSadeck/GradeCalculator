@@ -1,6 +1,7 @@
+import 'package:uuid/uuid.dart';
+
 class Module {
-  static int lastId = 0;
-  final int id;
+  final String id;
   String name;
   int coefficient;
   int credit;
@@ -17,7 +18,7 @@ class Module {
     required this.hasTP,
     required this.hasTD,
     this.credit = 0,
-  }) : id = lastId++;
+  }) : id = const Uuid().v4();
 
   void update({
     required String name,
@@ -42,6 +43,10 @@ class Module {
     this.tdGrade = tdGrade;
     this.tpGrade = tpGrade;
     this.examGrade = examGrade;
+    calculateGrades(examWeight: examWeight);
+  }
+
+  void calculateGrades({required examWeight}) {
     if (hasTD && hasTP) {
       finalGrade =
           ((tdGrade + tpGrade) / 2) * (1 - examWeight) + examWeight * examGrade;
@@ -81,6 +86,6 @@ class Module {
 
   @override
   String toString() {
-    return 'Module{id: $id, name: $name, coefficient: $coefficient, hasTP: $hasTP, hasTD: $hasTD, tdGrade: $tdGrade, tpGrade: $tpGrade, examGrade: $examGrade, finalGrade: $finalGrade}';
+    return '\n Module{id: $id, name: $name, coefficient: $coefficient, hasTP: $hasTP, hasTD: $hasTD, tdGrade: $tdGrade, tpGrade: $tpGrade, examGrade: $examGrade, finalGrade: $finalGrade}';
   }
 }

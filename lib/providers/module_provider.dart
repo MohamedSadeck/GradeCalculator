@@ -15,7 +15,10 @@ class ModuleProvider extends ChangeNotifier {
 
   set gradeWeight(double value) {
     _gradeWeight = value;
-    notifyListeners();
+    for (Module m in _modules) {
+      m.calculateGrades(examWeight: _gradeWeight);
+    }
+    _calculateAverage();
     _saveGradeWeightToPrefs();
   }
 
@@ -26,11 +29,12 @@ class ModuleProvider extends ChangeNotifier {
 
   void addModule(Module module) {
     _modules.add(module);
+    _modules.sort((a, b) => b.coefficient.compareTo(a.coefficient));
     _calculateAverage();
     _saveModulesToPrefs();
   }
 
-  void removeModule(int id) {
+  void removeModule(String id) {
     _modules.removeWhere((module) => module.id == id);
     _calculateAverage();
     _saveModulesToPrefs();

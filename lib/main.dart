@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:grade_calculator/providers/module_provider.dart';
-import 'package:grade_calculator/screens/grade_input_screen.dart';
+import 'package:grade_calculator/providers/theme_provider.dart';
 import 'package:grade_calculator/screens/grade_list_screen.dart';
 import 'package:grade_calculator/screens/home_screen.dart';
 import 'package:grade_calculator/screens/module_form_screen.dart';
 import 'package:grade_calculator/screens/module_list_screen.dart';
+import 'package:grade_calculator/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'screens/settings_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ModuleProvider()),
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
       ],
       child: const MyApp(),
     ),
@@ -23,19 +26,17 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      initialRoute: HomeScreen.routeName,
+      theme: themeProvider.themeData,
+      initialRoute: SplashScreen.routeName,
       routes: {
+        SplashScreen.routeName: (context) => const SplashScreen(),
         HomeScreen.routeName: (context) => const HomeScreen(),
         ModuleListScreen.routeName: (context) => const ModuleListScreen(),
         ModuleFormScreen.routeName: (context) => const ModuleFormScreen(),
         GradeListScreen.routeName: (context) => const GradeListScreen(),
-        GradeInputScreen.routeName: (context) => const GradeInputScreen(),
         SettingsScreen.routeName: (context) => const SettingsScreen(),
       },
     );
