@@ -50,7 +50,7 @@ class _GradePickerState extends State<GradePicker> {
           Card(
             elevation: 4,
             child: Container(
-              height: height * 0.12,
+              height: height * 0.115,
               width: width * 0.6,
               decoration: BoxDecoration(
                 border: Border.all(
